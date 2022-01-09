@@ -1,9 +1,47 @@
 ﻿@page "/"
 
+@using Infrastructure.Data
+@using Application.Services
+@using Domain.Models
+
+@inject DataContext DataContext
+
 <PageTitle>Index</PageTitle>
 
 <h1>Hello, world!</h1>
 
 Welcome to your new app.
+<br>
+<button class="btn btn-primary" @onclick="Auth">Login</button>
 
 <SurveyPrompt Title="How is Blazor working for you?" />
+
+<AuthorizeView>
+    <Authorized>
+        <p>Hello, Developer</p>
+    </Authorized>
+</AuthorizeView>
+
+@code{
+
+    private void Auth()
+    {
+
+    }
+
+    private void InitUser()
+    {
+        @* User user = new User{
+            Id = $"{Guid.NewGuid()}",
+            Role = "Devoper",
+            Username = "Einharan",
+            Password = Cryptograph.GetHash("248163264")
+        };
+
+        if(!DataContext.Users!.Any(x => x.Username == "Einharan"))
+        {
+            DataContext.Users!.Add(user);
+            DataContext.SaveChanges();
+        } *@
+    }
+}

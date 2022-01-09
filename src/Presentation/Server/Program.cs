@@ -2,9 +2,11 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 using Infrastructure.Data;
 using Application.Services;
 using Server.Data;
+using Server.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,11 +20,13 @@ builder.Services.AddDbContext<DataContext>(
         migration => migration.MigrationsAssembly("Infrastructure")),
     ServiceLifetime.Scoped
 );
-
+builder.Services.AddScoped<ProtectedLocalStorage>();
 builder.Services.AddScoped<Authentication>();
 builder.Services.AddScoped<AuthenticationStateProvider>(
     auth => auth.GetRequiredService<Authentication>()
 );
+
+builder.Services.AddScoped<Middleware>();
 
 var app = builder.Build();
 
@@ -39,6 +43,9 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");

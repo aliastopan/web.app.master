@@ -18,7 +18,7 @@ namespace Application.Services
             return await Task.FromResult(authetication);
         }
 
-        public async Task<AuthenticationState> Authenticate(string username)
+        public async Task<AuthenticationState> AuthenticateAsync(string username)
         {
             var claims = new Claim[]{
                 new Claim(ClaimTypes.Name, username)
