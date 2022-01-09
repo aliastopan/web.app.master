@@ -1,4 +1,7 @@
-﻿@inherits LayoutComponentBase
+﻿@using Server.Services
+@inject Middleware Middleware
+
+@inherits LayoutComponentBase
 
 <PageTitle>Server</PageTitle>
 
@@ -17,3 +20,10 @@
         </article>
     </main>
 </div>
+
+@code{
+    protected async override void OnInitialized()
+    {
+        await Middleware.CheckPersistent();
+    }
+}

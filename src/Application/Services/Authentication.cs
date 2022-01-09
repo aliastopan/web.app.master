@@ -69,6 +69,16 @@ namespace Application.Services
             return new ClaimsIdentity(claims, authType);
         }
 
+        public void Persistent(Claim[] claims)
+        {
+            var authType = "apiauth_type";
+            var identity = new ClaimsIdentity(claims, authType);
+            var user = new ClaimsPrincipal(identity);
+            var authetication = new AuthenticationState(user);
+
+            NotifyAuthenticationStateChanged(Task.FromResult(authetication));
+        }
+
 
 
     }

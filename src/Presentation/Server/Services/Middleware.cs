@@ -46,13 +46,26 @@ namespace Server.Services
             }
             else
             {
-                ClaimsIdentity user = authentication.CreateIdentity(username);
-                string persistent = JsonSerializer.Serialize<ClaimsIdentity>(user);
-                await localStorage.SetAsync(username, persistent);
+                // Claim[] claims = (Claim[]) authentication.AuthState(username).User.Claims;
+                // ClaimsIdentity user = authentication.CreateIdentity(username);
+                string persistent = JsonSerializer.Serialize<User>(User);
+                await localStorage.SetAsync(User.Role!, persistent);
                 return true;
             }
 
 
+        }
+
+        public async Task CheckPersistent()
+        {
+            var result = await localStorage.GetAsync<string>("Developer");
+
+            if(result.Success)
+            {
+                string json = result.Value!;
+                User user = JsonSerializer.Deserialize<User>(json)!;
+                authentication.Authenticate(user.Username!);
+            }
         }
     }
 }
