@@ -6,3 +6,6 @@ dotnet ef --startup-project [startup.csproj] database update "[name]" --project 
 
     migration add
     database update
+
+[tool]
+dotnet tool update --global dotnet-ef

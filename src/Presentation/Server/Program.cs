@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
+using Microsoft.EntityFrameworkCore;
+using Infrastructure.Data;
 using Server.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +10,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
+
+builder.Services.AddDbContext<DataContext>(
+    options => options.UseSqlite(builder.Configuration.GetConnectionString("SQLite"),
+        migration => migration.MigrationsAssembly("Infrastructure")),
+    ServiceLifetime.Scoped
+);
 
 var app = builder.Build();
 
