@@ -3,8 +3,11 @@
 @using Infrastructure.Data
 @using Application.Services
 @using Domain.Models
+@using Server.Services
 
 @inject DataContext DataContext
+@inject Authentication Authentication
+@inject Middleware Middleware
 
 <PageTitle>Index</PageTitle>
 
@@ -12,20 +15,27 @@
 
 Welcome to your new app.
 <br>
-<button class="btn btn-primary" @onclick="Auth">Login</button>
+<button class="btn btn-primary" @onclick="Login">Login</button>
 
 <SurveyPrompt Title="How is Blazor working for you?" />
 
 <AuthorizeView>
     <Authorized>
-        <p>Hello, Developer</p>
+        <p>Hello, Developer @context.User.Identity!.Name</p>
     </Authorized>
 </AuthorizeView>
 
 @code{
 
-    private void Auth()
+    protected override void OnInitialized()
     {
+        DataContext.Users! .Any( user => user.Username == "Guest");
+    }
+
+    private async Task Login()
+    {
+        bool isAuthenticated = await Middleware.TryLoginAsync("Einharan", "248163264");
+        Authentication.Authenticate("Einharan");
 
     }
 
