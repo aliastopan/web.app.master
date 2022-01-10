@@ -1,23 +1,17 @@
 ﻿@page "/"
 
 @using Infrastructure.Persistence
-@using Application.Services
 @using Domain.Models
-@using Server.Services
 
 @inject AppDbContext DataContext
-@inject Authentication Authentication
-@inject Middleware Middleware
 
 <PageTitle>Index</PageTitle>
 
 <h1>Hello, world!</h1>
 
-<Component1 />
-
 Welcome to your new app.
 <br>
-<button class="btn btn-primary" @onclick="Login">Login</button>
+@* <button class="btn btn-primary" @onclick="Login">Login</button> *@
 
 <SurveyPrompt Title="How is Blazor working for you?" />
 
@@ -29,31 +23,4 @@ Welcome to your new app.
 
 @code{
 
-    protected override void OnInitialized()
-    {
-        @* DataContext.Users! .Any( user => user.Username == "Guest"); *@
-    }
-
-    private async Task Login()
-    {
-        bool isAuthenticated = await Middleware.TryLoginAsync("Einharan", "248163264");
-        Authentication.Authenticate("Einharan");
-
-    }
-
-    private void InitUser()
-    {
-        @* User user = new User{
-            Id = $"{Guid.NewGuid()}",
-            Role = "Devoper",
-            Username = "Einharan",
-            Password = Cryptograph.GetHash("248163264")
-        };
-
-        if(!DataContext.Users!.Any(x => x.Username == "Einharan"))
-        {
-            DataContext.Users!.Add(user);
-            DataContext.SaveChanges();
-        } *@
-    }
 }

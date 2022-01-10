@@ -4,9 +4,9 @@ using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 using Infrastructure.Persistence;
-using Application.Services;
+using Infrastructure.Services;
+// using Application.Services;
 using Server.Data;
-using Server.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,18 +17,16 @@ builder.Services.AddRazorPages( options =>
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
 
+builder.Services.AddScoped<ProtectedLocalStorage>();
 builder.Services.AddDbContext<AppDbContext>(
     options => options.UseSqlite(builder.Configuration.GetConnectionString("SQLite"),
         migration => migration.MigrationsAssembly("Infrastructure")),
     ServiceLifetime.Scoped
 );
-builder.Services.AddScoped<ProtectedLocalStorage>();
-builder.Services.AddScoped<Authentication>();
+builder.Services.AddScoped<Authenticator>();
 builder.Services.AddScoped<AuthenticationStateProvider>(
-    auth => auth.GetRequiredService<Authentication>()
+    auth => auth.GetRequiredService<Authenticator>()
 );
-
-builder.Services.AddScoped<Middleware>();
 
 var app = builder.Build();
 

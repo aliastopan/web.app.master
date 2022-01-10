@@ -1,6 +1,4 @@
-﻿@using Server.Services
-@using Microsoft.AspNetCore.Components.Server
-@inject Middleware Middleware
+﻿@using Microsoft.AspNetCore.Components.Server
 
 @inherits LayoutComponentBase
 
@@ -23,8 +21,5 @@
 </div>
 
 @code{
-    protected async override void OnInitialized()
-    {
-        await Middleware.CheckPersistent();
-    }
+
 }
