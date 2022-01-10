@@ -29,7 +29,7 @@ Welcome to your new app.
 
     protected override void OnInitialized()
     {
-        DataContext.Users! .Any( user => user.Username == "Guest");
+        @* DataContext.Users! .Any( user => user.Username == "Guest"); *@
     }
 
     private async Task Login()
