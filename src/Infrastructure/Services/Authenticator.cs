@@ -30,6 +30,7 @@ namespace Infrastructure.Services
         {
             var (user, isVerified) = appDbContext.LookUpUser(guest.Username!, guest.Password!);
             var principal = new ClaimsPrincipal();
+            System.Console.WriteLine($"Verification: {isVerified}");
 
             if(isVerified)
             {

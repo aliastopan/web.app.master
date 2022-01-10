@@ -1,10 +1,11 @@
 @page "/developer"
+@using Infrastructure.Common
 
 <h1>Developer Page</h1>
 <AuthorizeView>
     <Authorized>
         <div class="construction">
-            Hello <strong> @context.User.Identity!.Name </strong>, Welcome Back!
+            Welcome Back <strong> @context.User.Identity!.Name!.UpperCaseFirstCharacter() </strong>!
         </div>
     </Authorized>
     <NotAuthorized>

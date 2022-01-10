@@ -26,7 +26,7 @@ namespace Infrastructure.Persistence
             var result = this.Users!
                 .FirstOrDefault(user =>
                     username == user.Username &&
-                    password == user.Password);
+                    hash == user.Password);
 
             return (result, result is not null)!;
         }
