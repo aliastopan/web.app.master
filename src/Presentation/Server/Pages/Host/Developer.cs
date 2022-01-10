@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Components;
 using Infrastructure.Persistence;
+using Infrastructure.Services;
 using Domain.Models;
 
 namespace Server.Pages.Host
@@ -7,7 +8,10 @@ namespace Server.Pages.Host
     public partial class Developer
     {
         [Inject]
-        public AppDbContext? Context { get; set; }
+        protected AppDbContext? Context { get; init; }
+
+        [Inject]
+        protected Authenticator? Authenticator { get; init; }
 
         protected override async Task OnInitializedAsync()
         {
@@ -24,6 +28,10 @@ namespace Server.Pages.Host
             if (!isUserExist)
             {
                 await Context!.InsertUserAsync(user);
+            }
+            else
+            {
+                await Authenticator!.LogInAsync(user);
             }
         }
     }

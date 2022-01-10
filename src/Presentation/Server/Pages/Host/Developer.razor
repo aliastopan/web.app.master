@@ -1,6 +1,17 @@
 @page "/developer"
 
-<h1>Developer Mode</h1>
-<div class="construction">
-    This is <strong>developer</strong> page exclusive.
-</div>
+<h1>Developer Page</h1>
+<AuthorizeView>
+    <Authorized>
+        <div class="construction">
+            Hello <strong> @context.User.Identity!.Name </strong>, Welcome Back!
+        </div>
+    </Authorized>
+    <NotAuthorized>
+        <div class="construction">
+            This is <strong>developer</strong> page exclusive.
+        </div>
+    </NotAuthorized>
+</AuthorizeView>
+
+

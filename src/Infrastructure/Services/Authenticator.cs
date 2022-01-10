@@ -1,7 +1,9 @@
+using System.Text.Json;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 using Microsoft.AspNetCore.Components.Authorization;
 using Infrastructure.Persistence;
+using Domain.Models;
 
 namespace Infrastructure.Services
 {
@@ -24,9 +26,32 @@ namespace Infrastructure.Services
             return await Task.FromResult(authetication);
         }
 
-        public void Auth()
+        public async Task LogInAsync(User guest)
         {
-   
+            var (user, isVerified) = appDbContext.LookUpUser(guest.Username!, guest.Password!);
+            var principal = new ClaimsPrincipal();
+
+            if(isVerified)
+            {
+                var claims = new Claim[]{
+                    new Claim(ClaimTypes.Name, guest.Username!),
+                    new Claim(ClaimTypes.Role, guest.Role!)
+                };
+                var authType = "apiauth_type";
+                var identity = new ClaimsIdentity(claims, authType);
+                principal = new ClaimsPrincipal(identity);
+
+                string credential = JsonSerializer.Serialize<User>(user);
+                await localStorage.SetAsync(user.Role!, credential);
+            }
+
+            var authState = new AuthenticationState(principal);
+            NotifyAuthenticationStateChanged(Task.FromResult(authState));
+        }
+
+        public void Persistent()
+        {
+
         }
     }
 }
