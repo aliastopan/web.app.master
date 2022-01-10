@@ -1,11 +1,11 @@
 ﻿@page "/"
 
-@using Infrastructure.Data
+@using Infrastructure.Persistence
 @using Application.Services
 @using Domain.Models
 @using Server.Services
 
-@inject DataContext DataContext
+@inject AppDbContext DataContext
 @inject Authentication Authentication
 @inject Middleware Middleware
 

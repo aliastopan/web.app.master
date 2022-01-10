@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
-using Infrastructure.Data;
+using Infrastructure.Persistence;
 using Application.Services;
 using Server.Data;
 using Server.Services;
@@ -17,7 +17,7 @@ builder.Services.AddRazorPages( options =>
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
 
-builder.Services.AddDbContext<DataContext>(
+builder.Services.AddDbContext<AppDbContext>(
     options => options.UseSqlite(builder.Configuration.GetConnectionString("SQLite"),
         migration => migration.MigrationsAssembly("Infrastructure")),
     ServiceLifetime.Scoped

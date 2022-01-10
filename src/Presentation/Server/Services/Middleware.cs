@@ -1,7 +1,7 @@
 using System.Text.Json;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
-using Infrastructure.Data;
+using Infrastructure.Persistence;
 using Application.Services;
 using Domain.Models;
 
@@ -11,11 +11,11 @@ namespace Server.Services
     {
         private readonly Authentication authentication;
         private readonly ProtectedLocalStorage localStorage;
-        private readonly DataContext dataContext;
+        private readonly AppDbContext dataContext;
 
         public Middleware(Authentication authentication,
             ProtectedLocalStorage localStorage,
-            DataContext dataContext)
+            AppDbContext dataContext)
         {
             this.authentication = authentication;
             this.localStorage = localStorage;
