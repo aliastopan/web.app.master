@@ -24,10 +24,14 @@ builder.Services.AddDbContext<AppDbContext>(
         migration => migration.MigrationsAssembly("Infrastructure")),
     ServiceLifetime.Scoped
 );
-builder.Services.AddScoped<Authenticator>();
-builder.Services.AddScoped<AuthenticationStateProvider>(
-    auth => auth.GetRequiredService<Authenticator>()
-);
+
+builder.Services.AddScoped<AuthenticationStateProvider, Authenticator>();
+builder.Services.AddScoped<Authorizer>();
+
+// builder.Services.AddScoped<Authenticator>();
+// builder.Services.AddScoped<AuthenticationStateProvider>(
+//     auth => auth.GetRequiredService<Authenticator>()
+// );
 
 var app = builder.Build();
 
