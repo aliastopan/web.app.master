@@ -14,6 +14,7 @@ namespace Domain.Models
         public string? Role { get; set; }
 
         [Required]
+        [MinLength(6)]
         [MaxLength(32)]
         public string? Username { get; set; }
 
