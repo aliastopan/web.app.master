@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace Domain.Models
 {
@@ -38,16 +39,41 @@ namespace Domain.Models
             get { return $"{FirstName} {LastName}"; }
         }
 
-        public DateOnly DateOfBirth { get; set; } =
+        [NotMapped]
+        [JsonIgnore]
+        private DateOnly dob =
             new DateOnly(
                 DateTime.Now.Year,
                 DateTime.Now.Month,
                 DateTime.Now.Day
             );
 
+        [NotMapped]
+        [JsonIgnore]
+        public DateOnly DateOfBirthFormat
+        {
+            get {
+                var dateTime = Convert.ToDateTime(DateOfBirth);
+                var dateOnly = new DateOnly(
+                    dateTime.Year,
+                    dateTime.Month,
+                    dateTime.Day
+                );
+                dob = dateOnly;
+                return dob;
+            }
+            set { dob = value; }
+        }
+
+        public string DateOfBirth
+        {
+            get { return dob.ToString(); }
+        }
+
         public string? ContactNumber { get; set; }
 
         // [Required]
         public string? PictureProfile { get; set; }
+
     }
 }

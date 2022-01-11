@@ -31,7 +31,7 @@ namespace Razor.Pages.Features.Account
                 EmailAddress = "einharan.protonmail.com",
                 FirstName = "Vance",
                 LastName = "Einharan",
-                DateOfBirth = new DateOnly(1996, 8, 19),
+                DateOfBirthFormat = new DateOnly(1996, 8, 19),
                 PictureProfile = "einharan.png"
             };
 
