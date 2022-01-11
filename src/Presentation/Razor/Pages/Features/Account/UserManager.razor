@@ -19,16 +19,37 @@
             @bind-Value="Guest!.Password">
         </InputText>
         <InputText
-            id="password"
+            id="password-confirm"
             type="password"
             class="form-control input-form"
             placeholder="Confirm Password"
             @bind-Value="Guest!.ConfirmPassword">
         </InputText>
-        <label>
-            Date of Birth:
-            <InputDate class="input-date" @bind-Value="Guest.DateOfBirth" />
-        </label>
+        <label for="dob"> Date of Birth: </label>
+        <InputDate
+            for="dob"
+            class="form-control input-date"
+            @bind-Value="Guest.DateOfBirth">
+        </InputDate>
+        <InputText
+            id="email-address"
+            class="form-control input-form"
+            placeholder="Email Address"
+            @bind-Value="Guest!.EmailAddress">
+        </InputText>
+        <label for="picture-profile">Picture Profile</label>
+        <InputFile
+            id="picture-profile"
+            class="form-control input-form"
+            OnChange="@UploadFile">
+        </InputFile>
     </div>
 
 </EditForm>
+
+@code{
+    private void UploadFile(InputFileChangeEventArgs e)
+    {
+
+    }
+}
