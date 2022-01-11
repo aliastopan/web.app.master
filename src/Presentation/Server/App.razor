@@ -1,10 +1,10 @@
-﻿@using UserManager = Razor.Pages.Features.Account.UserManagerBase
-@using AuthPage = Razor.Pages.Features.Account.AuthPageBase
+﻿@using UserPage = Common.Component.Pages.Features.Account.UserPageBase
+@using AuthPage = Common.Component.Pages.Features.Account.AuthPageBase
 
 <CascadingAuthenticationState>
     <Router AppAssembly="@typeof(App).Assembly"
         AdditionalAssemblies="new[] {
-            typeof(UserManager).Assembly,
+            typeof(UserPage).Assembly,
             typeof(AuthPage).Assembly
         }">
         <Found Context="routeData">

@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Server.Pages.Common;
+namespace Server.Pages.Shared;
 
 [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 [IgnoreAntiforgeryToken]

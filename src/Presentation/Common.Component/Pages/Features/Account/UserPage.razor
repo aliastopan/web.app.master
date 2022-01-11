@@ -1,0 +1,73 @@
+@page "/user"
+@inherits UserPageBase
+@using System.IO
+
+<EditForm Model="@Guest">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div class="container">
+        <InputText
+            id="username"
+            class="form-control input-form"
+            placeholder="Username"
+            @bind-Value="Guest!.Username">
+        </InputText>
+        <InputText
+            id="password"
+            type="password"
+            class="form-control input-form"
+            placeholder="Password"
+            @bind-Value="Guest!.Password">
+        </InputText>
+        <InputText
+            id="password-confirm"
+            type="password"
+            class="form-control input-form"
+            placeholder="Confirm Password"
+            @bind-Value="Guest!.ConfirmPassword">
+        </InputText>
+        <label for="dob"> Date of Birth: </label>
+        <InputDate
+            for="dob"
+            class="form-control input-date"
+            @bind-Value="Guest.DateOfBirthFormat">
+        </InputDate>
+        <InputText
+            id="email-address"
+            class="form-control input-form"
+            placeholder="Email Address"
+            @bind-Value="Guest!.EmailAddress">
+        </InputText>
+        <label for="picture-profile">Picture Profile</label>
+        <InputFile
+            id="picture-profile"
+            class="form-control input-form"
+            OnChange="@OnInputFileChange">
+        </InputFile>
+        <button
+            class="btn btn-primary input-form"
+            @onclick="UploadFile"
+            type="submit">Upload Selected File
+        </button>
+    </div>
+
+</EditForm>
+
+@code{
+    private IBrowserFile? file;
+    private string subfolder = $"images/avatars";
+
+    private void OnInputFileChange(InputFileChangeEventArgs e)
+    {
+        file = e.File;
+        Guest!.PictureProfile = FileManager!.GetFilePath(file, subfolder);
+    }
+
+    private async Task UploadFile()
+    {
+        if(file is not null)
+        {
+            await FileManager!.UploadAsync(file, subfolder);
+        }
+    }
+}
