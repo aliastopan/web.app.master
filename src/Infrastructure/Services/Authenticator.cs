@@ -34,12 +34,7 @@ namespace Infrastructure.Services
 
             if(isVerified)
             {
-                var claims = new Claim[]{
-                    new Claim(ClaimTypes.Name, guest.Username!),
-                    new Claim(ClaimTypes.Role, guest.Role!)
-                };
-                var authType = "apiauth_type";
-                var identity = new ClaimsIdentity(claims, authType);
+                var identity = CreateIdentity(user);
                 principal = new ClaimsPrincipal(identity);
 
                 var format = new JsonSerializerOptions { WriteIndented = true };
@@ -51,9 +46,28 @@ namespace Infrastructure.Services
             NotifyAuthenticationStateChanged(Task.FromResult(authState));
         }
 
-        public void Persistent()
+        public async Task PersistentLoginAsync()
         {
+            var result = await localStorage!.GetAsync<string>("developer");
+            if(result.Success)
+            {
+                User user = JsonSerializer.Deserialize<User>(result.Value!)!;
+                var identity = CreateIdentity(user);
+                var principal = new ClaimsPrincipal(identity);
+                var authState = new AuthenticationState(principal);
+                NotifyAuthenticationStateChanged(Task.FromResult(authState));
 
+            }
+        }
+
+        private ClaimsIdentity CreateIdentity(User user)
+        {
+            var claims = new Claim[]{
+                new Claim(ClaimTypes.Name, user.Username!),
+                new Claim(ClaimTypes.Role, user.Role!)
+            };
+            var authType = "apiauth_type";
+            return new ClaimsIdentity(claims, authType);
         }
     }
 }
