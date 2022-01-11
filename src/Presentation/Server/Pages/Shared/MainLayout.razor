@@ -6,14 +6,27 @@
 
 <PageTitle>Server</PageTitle>
 
+
 <div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
+    <AuthorizeView>
+        <Authorized>
+            <div class="sidebar">
+                <NavMenu />
+            </div>
+        </Authorized>
+    </AuthorizeView>
 
     <main>
+
         <div class="top-row px-4">
-            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
+            <AuthorizeView>
+                <Authorized>
+                    <a href="#" @onclick="Authenticator.LogoutAsync"> Logout</a>
+                </Authorized>
+                <NotAuthorized>
+                    <a href="/auth" target="self">Login</a>
+                </NotAuthorized>
+            </AuthorizeView>
         </div>
 
         <article class="content px-4">
@@ -27,5 +40,4 @@
     {
         await Authenticator.PersistentLoginAsync();
     }
-
 }
