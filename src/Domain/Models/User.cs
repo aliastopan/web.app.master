@@ -7,7 +7,7 @@ namespace Domain.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public string? Id { get; set; }
+        public string? Id { get; init; }
 
         public string? Role { get; set; }
 
@@ -19,5 +19,23 @@ namespace Domain.Models
         [MinLength(8)]
         [MaxLength(256)]
         public string? Password { get; set; }
+
+        public string? EmailAddress { get; set; }
+
+        public string? FirstName { get; set; }
+        public string? LastName { get; set; }
+
+        [NotMapped]
+        public string FullName{
+            get{
+                return $"{FirstName} {LastName}";
+            }
+        }
+
+        public DateOnly DateOfBirth { get; set; }
+
+        public string? ContactNumber { get; set; }
+
+        public string? PictureProfile { get; set; }
     }
 }

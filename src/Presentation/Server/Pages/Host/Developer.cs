@@ -13,18 +13,18 @@ namespace Server.Pages.Host
         [Inject]
         protected Authenticator? Authenticator { get; init; }
 
-        protected override async Task OnInitializedAsync()
-        {
-            User user = new User{
-                Id = Guid.NewGuid().ToString(),
-                Role = "developer",
-                Username = "einharan",
-                Password = "248163264"
-            };
+        // protected override async Task OnInitializedAsync()
+        // {
+        //     User user = new User{
+        //         Id = Guid.NewGuid().ToString(),
+        //         Role = "developer",
+        //         Username = "einharan",
+        //         Password = "248163264"
+        //     };
 
-            await Authenticator!.LogInAsync(user);
+        //     await Authenticator!.LogInAsync(user);
 
-        }
+        // }
 
     }
 }
