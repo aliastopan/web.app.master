@@ -1,8 +1,14 @@
 @page "/user-manager"
 @inherits UserManagerBase
 
-
-<EditForm Model="@User">
-
+<EditForm Model="@Guest">
+    <div>
+        <InputText
+            id="username"
+            class="form-control"
+            placeholder="Username"
+            @bind-Value="Guest!.Username">
+        </InputText>
+    </div>
 
 </EditForm>
