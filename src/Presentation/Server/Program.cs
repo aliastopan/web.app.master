@@ -25,13 +25,12 @@ builder.Services.AddDbContext<AppDbContext>(
     ServiceLifetime.Scoped
 );
 
-builder.Services.AddScoped<AuthenticationStateProvider, Authenticator>();
+// builder.Services.AddScoped<AuthenticationStateProvider, Authenticator>();
+builder.Services.AddScoped<Authenticator>();
+builder.Services.AddScoped<AuthenticationStateProvider>(
+    provider => provider.GetRequiredService<Authenticator>()
+);
 builder.Services.AddScoped<Authorizer>();
-
-// builder.Services.AddScoped<Authenticator>();
-// builder.Services.AddScoped<AuthenticationStateProvider>(
-//     auth => auth.GetRequiredService<Authenticator>()
-// );
 
 var app = builder.Build();
 
