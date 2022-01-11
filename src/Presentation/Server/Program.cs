@@ -12,7 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages( options =>
-    options.RootDirectory = "/Pages/Host"
+    options.RootDirectory = "/Pages/Shared"
 );
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();

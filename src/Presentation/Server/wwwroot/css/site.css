@@ -71,3 +71,6 @@ a, .btn-link {
     content: "An error has occurred."
 }
 
+::deep .input-form{
+    margin: 0.25rem 0;
+}
