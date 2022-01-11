@@ -39,23 +39,32 @@ namespace Infrastructure.Services
 
                 var format = new JsonSerializerOptions { WriteIndented = true };
                 string credential = JsonSerializer.Serialize<User>(user, format);
-                await localStorage.SetAsync(user.Role!, credential);
+                await localStorage.SetAsync("identity", credential);
             }
 
-            var authState = new AuthenticationState(principal);
-            NotifyAuthenticationStateChanged(Task.FromResult(authState));
+            var autheticationState = new AuthenticationState(principal);
+            NotifyAuthenticationStateChanged(Task.FromResult(autheticationState));
+        }
+
+        public async Task LogoutAsync()
+        {
+            await localStorage.DeleteAsync("identity");
+            var principal = new ClaimsPrincipal();
+            var autheticationState = new AuthenticationState(principal);
+
+            NotifyAuthenticationStateChanged(Task.FromResult(autheticationState));
         }
 
         public async Task PersistentLoginAsync()
         {
-            var result = await localStorage!.GetAsync<string>("developer");
+            var result = await localStorage!.GetAsync<string>("identity");
             if(result.Success)
             {
                 User user = JsonSerializer.Deserialize<User>(result.Value!)!;
                 var identity = CreateIdentity(user);
                 var principal = new ClaimsPrincipal(identity);
-                var authState = new AuthenticationState(principal);
-                NotifyAuthenticationStateChanged(Task.FromResult(authState));
+                var autheticationState = new AuthenticationState(principal);
+                NotifyAuthenticationStateChanged(Task.FromResult(autheticationState));
 
             }
         }
