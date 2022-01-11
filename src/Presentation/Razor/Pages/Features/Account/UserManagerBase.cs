@@ -32,6 +32,7 @@ namespace Razor.Pages.Features.Account
                 FirstName = "Vance",
                 LastName = "Einharan",
                 DateOfBirthFormat = new DateOnly(1996, 8, 19),
+                ContactNumber = "-",
                 PictureProfile = "einharan.png"
             };
 

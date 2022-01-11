@@ -1,3 +1,4 @@
+using System.Xml;
 using System.Text.Json;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
@@ -41,7 +42,8 @@ namespace Infrastructure.Services
                 var identity = new ClaimsIdentity(claims, authType);
                 principal = new ClaimsPrincipal(identity);
 
-                string credential = JsonSerializer.Serialize<User>(user);
+                var format = new JsonSerializerOptions { WriteIndented = true };
+                string credential = JsonSerializer.Serialize<User>(user, format);
                 await localStorage.SetAsync(user.Role!, credential);
             }
 

@@ -23,6 +23,7 @@ namespace Domain.Models
         public string? Password { get; set; }
 
         [NotMapped]
+        [JsonIgnore]
         [Compare("Password")]
         public string? ConfirmPassword { get; set; }
 
@@ -34,6 +35,7 @@ namespace Domain.Models
         public string? LastName { get; set; }
 
         [NotMapped]
+        [JsonIgnore]
         public string FullName
         {
             get { return $"{FirstName} {LastName}"; }

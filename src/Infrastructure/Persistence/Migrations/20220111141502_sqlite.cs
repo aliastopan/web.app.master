@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -20,7 +19,6 @@ namespace Infrastructure.Persistence.Migrations
                     EmailAddress = table.Column<string>(type: "TEXT", nullable: true),
                     FirstName = table.Column<string>(type: "TEXT", nullable: true),
                     LastName = table.Column<string>(type: "TEXT", nullable: true),
-                    DateOfBirth = table.Column<DateOnly>(type: "TEXT", nullable: false),
                     ContactNumber = table.Column<string>(type: "TEXT", nullable: true),
                     PictureProfile = table.Column<string>(type: "TEXT", nullable: true)
                 },
