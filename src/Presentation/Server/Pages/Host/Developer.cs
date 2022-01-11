@@ -22,16 +22,9 @@ namespace Server.Pages.Host
                 Password = "248163264"
             };
 
-            // string x = user.Username.ToString().UpperCaseFirstCharacter();
             await Authenticator!.LogInAsync(user);
 
-            // var (_, isUserExist) = Context!
-            //     .LookUpUser(user.Username, user.Password);
-
-            // if (!isUserExist)
-            //     await Context!.InsertUserAsync(user);
-            // else
-            //     await Authenticator!.LogInAsync(user);
         }
+
     }
 }
