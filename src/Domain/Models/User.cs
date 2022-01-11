@@ -7,6 +7,7 @@ namespace Domain.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [Display(Name = "User ID")]
         public string? Id { get; init; }
 
         public string? Role { get; set; }
@@ -20,19 +21,29 @@ namespace Domain.Models
         [MaxLength(256)]
         public string? Password { get; set; }
 
+        [NotMapped]
+        [Compare("Password")]
+        public string? ConfirmPassword { get; set; }
+
+        [EmailAddress]
         public string? EmailAddress { get; set; }
 
         public string? FirstName { get; set; }
+
         public string? LastName { get; set; }
 
         [NotMapped]
-        public string FullName{
-            get{
-                return $"{FirstName} {LastName}";
-            }
+        public string FullName
+        {
+            get { return $"{FirstName} {LastName}"; }
         }
 
-        public DateOnly DateOfBirth { get; set; }
+        public DateOnly DateOfBirth { get; set; } =
+            new DateOnly(
+                DateTime.Now.Year,
+                DateTime.Now.Month,
+                DateTime.Now.Day
+            );
 
         public string? ContactNumber { get; set; }
 

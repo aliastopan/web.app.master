@@ -6,7 +6,9 @@ namespace Razor.Pages.Features.Account
     public class UserManagerBase : ComponentBase
     {
         protected User? User { get; set; }
-        public User? Guest { get; set; }
+        protected User? Guest { get; init; } = new User();
+
+        protected string? Password { get; set; }
 
         protected override void OnInitialized()
         {

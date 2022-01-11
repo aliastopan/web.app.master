@@ -2,13 +2,33 @@
 @inherits UserManagerBase
 
 <EditForm Model="@Guest">
-    <div>
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div class="container">
         <InputText
             id="username"
-            class="form-control"
+            class="form-control input-form"
             placeholder="Username"
             @bind-Value="Guest!.Username">
         </InputText>
+        <InputText
+            id="password"
+            type="password"
+            class="form-control input-form"
+            placeholder="Password"
+            @bind-Value="Guest!.Password">
+        </InputText>
+        <InputText
+            id="password"
+            type="password"
+            class="form-control input-form"
+            placeholder="Confirm Password"
+            @bind-Value="Guest!.ConfirmPassword">
+        </InputText>
+        <label>
+            Date of Birth:
+            <InputDate class="input-date" @bind-Value="Guest.DateOfBirth" />
+        </label>
     </div>
 
 </EditForm>

@@ -21,3 +21,10 @@ dotnet tool update --global dotnet-ef
 	<ItemGroup>
     	<FrameworkReference Include="Microsoft.AspNetCore.App" />
 	</ItemGroup>
+
+
+[routing] [page]
+    <Router AppAssembly="@typeof(App).Assembly"
+        AdditionalAssemblies="new[] {
+            typeof([PAGE.RAZOR]).Assembly
+        }">

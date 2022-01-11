@@ -1,0 +1,27 @@
+
+.container{
+    display: flex;
+    flex-direction: column;
+    width: 20rem;
+    padding: 1rem;
+    border: 1px solid grey;
+    border-radius: 0.5rem;
+    -webkit-border-radius: 0.5rem;
+    -moz-border-radius: 0.5rem;
+    -ms-border-radius: 0.5rem;
+    -o-border-radius: 0.5rem;
+}
+
+::deep .input-form{
+    margin: 0.25rem 0;
+}
+
+::deep .input-date{
+    margin: 0.25rem 0;
+    border-radius: 0.25rem;
+    border: 1px solid gray;
+    -webkit-border-radius: 0.25rem;
+    -moz-border-radius: 0.25rem;
+    -ms-border-radius: 0.25rem;
+    -o-border-radius: 0.25rem;
+}
