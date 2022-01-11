@@ -47,6 +47,7 @@ namespace Domain.Models
 
         public string? ContactNumber { get; set; }
 
+        [Required]
         public string? PictureProfile { get; set; }
     }
 }

@@ -17,6 +17,7 @@ builder.Services.AddRazorPages( options =>
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
 
+builder.Services.AddScoped<FileManager>();
 builder.Services.AddScoped<ProtectedLocalStorage>();
 builder.Services.AddDbContext<AppDbContext>(
     options => options.UseSqlite(builder.Configuration.GetConnectionString("SQLite"),
