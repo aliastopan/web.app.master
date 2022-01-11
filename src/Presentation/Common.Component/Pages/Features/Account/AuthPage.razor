@@ -1,24 +1,26 @@
 @inherits AuthPageBase
 @page "/auth"
 
-<h1 class="_red">Login Page</h1>
-
-<EditForm Model="@Guest">
+<EditForm Model="@Guest" OnValidSubmit="@TryLoginAsync">
     <DataAnnotationsValidator />
     <ValidationSummary />
-
-    <InputText
-        id="username"
-        class="form-control input-form"
-        placeholder="Username"
-        @bind-Value="Guest!.Username">
-    </InputText>
-    <InputText
-        id="password"
-        type="password"
-        class="form-control input-form"
-        placeholder="Password"
-        @bind-Value="Guest!.Password">
-    </InputText>
-
+    <div class="__container bg-light">
+        <InputText
+            id="username"
+            class="form-control __gap"
+            placeholder="Username"
+            @bind-Value="Guest!.Username">
+        </InputText>
+        <InputText
+            id="password"
+            type="password"
+            class="form-control __gap"
+            placeholder="Password"
+            @bind-Value="Guest!.Password">
+        </InputText>
+        <button
+            class="btn btn-primary __gap"
+            type="submit">Login
+        </button>
+    </div>
 </EditForm>

@@ -2,50 +2,50 @@
 @inherits UserPageBase
 @using System.IO
 
-<EditForm Model="@Guest">
+<EditForm Model="@NewUser">
     <DataAnnotationsValidator />
     <ValidationSummary />
-    <div class="container">
+    <div class="__container bg-light">
         <InputText
             id="username"
-            class="form-control input-form"
+            class="form-control __gap "
             placeholder="Username"
-            @bind-Value="Guest!.Username">
+            @bind-Value="NewUser!.Username">
         </InputText>
         <InputText
             id="password"
             type="password"
-            class="form-control input-form"
+            class="form-control __gap"
             placeholder="Password"
-            @bind-Value="Guest!.Password">
+            @bind-Value="NewUser!.Password">
         </InputText>
         <InputText
             id="password-confirm"
             type="password"
-            class="form-control input-form"
+            class="form-control __gap"
             placeholder="Confirm Password"
-            @bind-Value="Guest!.ConfirmPassword">
+            @bind-Value="NewUser!.ConfirmPassword">
         </InputText>
         <label for="dob"> Date of Birth: </label>
         <InputDate
             for="dob"
-            class="form-control input-date"
-            @bind-Value="Guest.DateOfBirthFormat">
+            class="form-control __gap"
+            @bind-Value="NewUser.DateOfBirthFormat">
         </InputDate>
         <InputText
             id="email-address"
-            class="form-control input-form"
+            class="form-control __gap"
             placeholder="Email Address"
-            @bind-Value="Guest!.EmailAddress">
+            @bind-Value="NewUser!.EmailAddress">
         </InputText>
         <label for="picture-profile">Picture Profile</label>
         <InputFile
             id="picture-profile"
-            class="form-control input-form"
+            class="form-control __gap"
             OnChange="@OnInputFileChange">
         </InputFile>
         <button
-            class="btn btn-primary input-form"
+            class="btn btn-primary __gap"
             @onclick="UploadFile"
             type="submit">Upload Selected File
         </button>
@@ -60,7 +60,7 @@
     private void OnInputFileChange(InputFileChangeEventArgs e)
     {
         file = e.File;
-        Guest!.PictureProfile = FileManager!.GetFilePath(file, subfolder);
+        NewUser!.PictureProfile = FileManager!.GetFilePath(file, subfolder);
     }
 
     private async Task UploadFile()

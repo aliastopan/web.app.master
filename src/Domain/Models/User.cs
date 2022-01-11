@@ -25,7 +25,7 @@ namespace Domain.Models
 
         [NotMapped]
         [JsonIgnore]
-        [Compare("Password")]
+        // [Compare("Password")]
         public string? ConfirmPassword { get; set; }
 
         [EmailAddress]

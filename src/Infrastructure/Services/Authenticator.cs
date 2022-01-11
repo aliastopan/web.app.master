@@ -27,7 +27,7 @@ namespace Infrastructure.Services
             return await Task.FromResult(authetication);
         }
 
-        public async Task LogInAsync(User guest)
+        public async Task<bool> LogInAsync(Guest guest)
         {
             var (user, isVerified) = appDbContext.LookUpUser(guest.Username!, guest.Password!);
             var principal = new ClaimsPrincipal();
@@ -44,6 +44,8 @@ namespace Infrastructure.Services
 
             var autheticationState = new AuthenticationState(principal);
             NotifyAuthenticationStateChanged(Task.FromResult(autheticationState));
+
+            return isVerified;
         }
 
         public async Task LogoutAsync()

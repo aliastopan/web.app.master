@@ -9,8 +9,18 @@ namespace Common.Component.Pages.Features.Account
         [Inject]
         protected Authenticator? Authenticator { get; init; }
 
-        protected User Guest { get; init; } = new User();
+        [Inject]
+        protected NavigationManager? NavigationManager { get; init; }
 
+        protected Guest Guest { get; init; } = new Guest();
 
+        protected async Task TryLoginAsync()
+        {
+            bool result = await Authenticator!.LogInAsync(Guest);
+            if(result)
+            {
+                NavigationManager!.NavigateTo("/");
+            }
+        }
     }
 }

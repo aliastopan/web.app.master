@@ -15,7 +15,7 @@ namespace Common.Component.Pages.Features.Account
         protected AppDbContext? AppDbContext { get; init; }
 
         protected User? User { get; set; }
-        protected User? Guest { get; init; } = new User(){
+        protected User? NewUser { get; init; } = new User(){
             Id = Guid.NewGuid().ToString()
         };
 

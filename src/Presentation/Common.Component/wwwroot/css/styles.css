@@ -1,3 +1,32 @@
 ._red{
     color: red;
 }
+
+.__container{
+    display: flex;
+    flex-direction: column;
+    width: 20rem;
+    padding: 1rem;
+    border: 1px solid #e7e7e7;
+    border-radius: 0.5rem;
+    -webkit-border-radius: 0.5rem;
+    -moz-border-radius: 0.5rem;
+    -ms-border-radius: 0.5rem;
+    -o-border-radius: 0.5rem;
+}
+
+.__first-item {
+    margin-top: 0;
+}
+
+.__last-item {
+    margin-bottom: 5rem;
+}
+
+::deep .__gap{
+    margin: 0.25rem 0;
+}
+
+.__gap{
+    margin: 0.35rem 0;
+}
